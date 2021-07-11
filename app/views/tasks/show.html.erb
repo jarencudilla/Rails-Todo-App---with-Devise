@@ -1,13 +1,26 @@
 <h1>Show Task</h1>
 <div class="container-fluid mt-3">
-<h1>Category: <%= @task.category.name %></h1>
-<h3><%= @task.name %></h3>
+ <%= link_to edit_category_task_path(@category, @task) do %>
+  <%= @task.name %>
+  <%= "Deadline: #{@task.deadline.to_s(:long)}" %></h4>
+  Status:
+  <% if @task.deadline < Date.today && @task.finish == false %>
+  Past Due
+  <% elsif @task.deadline == Date.today && @task.finish == false %>
+  Due Today
+  <% elsif @task.deadline > Date.today && @task.finish == false %>
+  Upcoming
+  <% elsif @task.finish == true %>
+  Finished
+  <% end %>
+  <%= @task.details %>
+  <% end %>
 
 
-<p><%= @task.details %></p>
 
-
-<%= link_to "Edit", edit_task_path(@task.id), class: 'btn btn-primary' %>
-<%= link_to "Delete", task_path(@task.id), method: :delete, class: 'btn btn-danger' %>
-<%= link_to "Back", tasks_path, class: 'btn btn-secondary'%>
+<%= link_to "Edit", edit_category_task_path(@category, @task), class: 'btn btn-primary' %>
+<%= link_to "Delete", category_task_path(@category, @task),
+              method: :delete,
+              data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+<%= link_to "Back", category_tasks_path, class: 'btn btn-secondary'%>
 </div>

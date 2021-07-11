@@ -15,7 +15,7 @@ before_action :get_category
     @task = @category.tasks.build(task_params)
     if @task.valid?
       @task.save
-      redirect_to category_tasks_path(@category)
+      redirect_to category_task_path
       flash[:notice] = 'Task created!'
     else
       redirect_to new_category_task_path(@category), alert: @task.errors.full_messages.first
@@ -39,17 +39,17 @@ before_action :get_category
       flash[:notice] = 'Task completed.'
     elsif @task.update(task_params)
       @task.save
-      redirect_to category_tasks_path(@category)
+      redirect_to category_path(@category)
       flash[:notice] = 'Task successfully updated.'
     else
-      redirect_to category_task_path, alert: @task.errors.full_messages.first
+      redirect_to edit_category_task_path(@category), alert: @task.errors.full_messages.first
     end
   end
 
   def destroy
     @task = @category.tasks.find(params[:id])
     @task.destroy
-    redirect_to categories_path, notice: 'Task successfully deleted.'
+    redirect_to category_tasks_path, notice: 'Task successfully deleted.'
   end
 
   private

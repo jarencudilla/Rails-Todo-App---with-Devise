@@ -7,27 +7,16 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "jquery"
+
+import "bootstrap"
+import flatpickr from "flatpickr"
+import "flatpickr/dist/flatpickr.min.css"
+flatpickr(".datepicker", {})
+
+// stylesheets
+require("../stylesheets/application.scss")
+import "../stylesheets/application"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-import "bootstrap"
-import "../stylesheets/application"
-
-//= require jquery-3.2.1.slim.min
-
-//= require jquery
-//= require jquery_ujs
-
-//= require popper.min
-//= require bootstrap.min
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
-
-$(document).ready(function(){
-  $('.datepicker').datepicker({
-    format: 'dd/mm/yyyy'
-  });
-});
