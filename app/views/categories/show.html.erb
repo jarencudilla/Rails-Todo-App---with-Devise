@@ -1,8 +1,8 @@
 <h1>View Category</h1>
 
-<h3><%= @category.category_name %></h3>
+<h3><%= @category.name %></h3>
 
-<p><%= @category.category_details %></p>
+<p><%= @category.details %></p>
 
 <%= link_to 'Edit', edit_category_path(@category.id) %> |
 <%= link_to 'Back', categories_path %>
