@@ -3,7 +3,7 @@ before_action :authenticate_user!
 before_action :get_category
 
   def index
-    @tasks = @category.tasks
+    @tasks = @category.tasks.order(:deadline)
   end
 
   def new
@@ -12,13 +12,12 @@ before_action :get_category
 
   def create
     @task = @category.tasks.build(task_params)
-
-      if @task.save
-      redirect_to category_path(@category)
+    if @task.valid?
+      @task.save
+      redirect_to category_tasks_path(@category)
       flash[:notice] = 'Task created!'
-
     else
-      redirect_to new_category_task_path, alert: @task.errors.full_messages.first
+      redirect_to new_category_task_path(@category), alert: @task.errors.full_messages.first
     end
   end
 
@@ -33,10 +32,14 @@ before_action :get_category
   def update
     @task = @category.tasks.find(params[:id])
 
-    if @task.update(task_params)
-      redirect_to category_url(@category)
+    if @task.update(task_params) && @task.completed
+      @task.save
+      redirect_to category_tasks_path(@category)
+      flash[:notice] = 'Task completed.'
+    elsif @task.update(task_params)
+      @task.save
+      redirect_to category_tasks_path(@category)
       flash[:notice] = 'Task successfully updated.'
-
     else
       redirect_to category_task_path, alert: @task.errors.full_messages.first
     end
@@ -45,17 +48,17 @@ before_action :get_category
   def destroy
     @task = @category.tasks.find(params[:id])
     @task.destroy
-    redirect_to category_url(@category), notice: 'Task successfully deleted.'
+    redirect_to categories_path, notice: 'Task successfully deleted.'
   end
 
   private
 
   def get_category
-    @category = Category.find(params[:category_id]) #category id is the foreign key in the task
+    @category = current_user.categories.find(params[:category_id])
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline, :category_id)
+    params.require(:task).permit(:name, :details, :deadline, :category_id, :completed)
   end
 
 end

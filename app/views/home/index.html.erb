@@ -1,6 +1,13 @@
+<% if user_signed_in? %>
+<div class="container-fluid" style="margin-top: 60px;">
+<h1 class="text-center">Things I Got To Do Today!</h1>
 
-<div class="container-fluid">
-<h1 class="text-center" style="margin-top: 60px;">Things I Got To Do Today!</h1>
-<%= render 'partials/carousel' %>
+<%= link_to "New Category", new_category_path %>
+<%= link_to "New Task", new_category_task_path %>
 
 </div>
+<% else %>
+<div class="container-fluid" style="margin-top: 60px;">
+<%= render 'partials/carousel' %>
+</div>
+<% end %>

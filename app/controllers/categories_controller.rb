@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
 
     if @category.valid?
         @category.save
-        redirect_to home_path
+        redirect_to categories_path
         flash[:notice] = "Category created!"
     else
       redirect_to new_category_path, alert: @category.errors.full_messages.first
@@ -33,7 +33,8 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.find(params[:id])
 
     if @category.update(category_params)
-      redirect_to home_path, notice: "Category successfully updated."
+      @category.save
+      redirect_to categories_path, notice: "Category successfully updated."
 
     else
       redirect_to edit_category_path, alert: @category.errors.full_messages.first
@@ -43,11 +44,11 @@ class CategoriesController < ApplicationController
   def destroy
     @category = current_user.categories.find(params[:id])
     @category.destroy
-    redirect_to home_path, notice: "Category successfully deleted."
+    redirect_to categories_path, notice: "Category successfully deleted."
   end
 
   private
-  
+
   def category_params
     params.require(:category).permit(:name, :details)
   end
