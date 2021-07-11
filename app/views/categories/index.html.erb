@@ -1,24 +1,32 @@
-<h1>Categories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.name %></td>
-        <td><%= link_to 'View', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Category', new_category_path %>
+<div class="container" style="margin-top: 100px;">
+		<div class="row">
+			<div class="col-md-10">
+      <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
+      <%= link_to 'New Category', new_category_path, class:"btn btn-secondary btn-lg float-end" %>
+      <h1>Categories</h1>
+      </div>
+				<div class="table">
+					<table class="table table-striped" style="border: 1px solid #d3d3d3;">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Details</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categories.each do |category| %>
+            <tr>
+              <td><%= category.name %></td>
+              <td><%= category.details %></td>
+              <td>
+                  <%= link_to 'View', category %> | <%= link_to 'Edit', edit_category_path(category) %>
+              </td>
+            </tr>
+          <% end %>
+             </tbody>
+          </table>
+        </div>
+      </div>
+		</div>
+	</div>

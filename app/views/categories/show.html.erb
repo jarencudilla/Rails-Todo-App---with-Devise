@@ -1,8 +1,26 @@
-<h1>View Category</h1>
-
-<h3><%= @category.name %></h3>
-
-<p><%= @category.details %></p>
-
-<%= link_to 'Edit', edit_category_path(@category.id) %> |
-<%= link_to 'Back', categories_path %>
+<div class="container" style="margin-top: 100px; width: 80vw">
+		<div class="row justify-content-md-center">
+			<div class="col-md-8">
+      <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
+      <%= link_to 'Edit Category', edit_category_path, class:"btn btn-secondary btn-lg float-end" %>
+      <h1>View Categories</h1>
+      </div>
+				<div class="table">
+					<table class="table table-striped" style="border: 1px solid #d3d3d3;">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><%= @category.name %></td>
+              <td><%= @category.details %></td>
+            </tr>
+             </tbody>
+          </table>
+        </div>
+      </div>
+		</div>
+	</div>
