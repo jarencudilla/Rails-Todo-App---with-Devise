@@ -3,7 +3,8 @@ before_action :authenticate_user!
 before_action :get_category
 
   def index
-    @tasks = @category.tasks.order(:deadline)
+    @tasks = @category.tasks.all
+    redirect_to category_path(@category)
   end
 
   def new

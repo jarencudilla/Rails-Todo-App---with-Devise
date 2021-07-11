@@ -1,44 +1,30 @@
-<div class="container">
-    <div class="row">
-    <div class="col-md-8">
-    <div class="row">
-   
-     <% @tasks.each do |task| %>
-        <div class="col-md-6">
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h3><%= link_to task.task_name, task_path(task.id) %></h3>
-                    <%= link_to "View", task_path(task.id), class: 'btn btn-primary'%>
-                </div>
-            </div>
-        </div>
-          <% end %>
+<div class="container" style="margin-top: 100px;">
+  <div class="row">
+	<div class="col-md-10">
+      <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
+      <%= link_to 'Create Task', new_category_task_path, class:"btn btn-secondary btn-lg float-end" %>
+      <h1>Task</h1>
       </div>
-    </div>
 
-    <div class="col-md-4">
 
-    <div class="card mt-3">
-        <div class="card-header">
-            Categories
-        </div>
 
-        <div class="card-body">
-
-        <ul class="list-group">
-
-         <% categories_task.each do |category| %>
-
-        
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <%= link_to category.name, tasks_path(:category_1 => category.id) %>
-    <span class="badge badge-primary badge-pill"><%= category.tasks.count %></span>
-  </li>
-       <% end %>
-        </ul>
+      <% @category.tasks.each do |task| %>
+      <% if task.deadline < Date.today && task.finish == false %>     
+      <%= task.name %>
+      <%= "DEADLINE: #{task.deadline.to_s(:long)}" %>
+      <%= task.details %>
+      <%= link_to "Category: #{@category.name}", category_path(@category) %>
+      </div>
+        <div class="flex">
+              <%= link_to category_task_path(@category,task) do %>
+              <% end %>
+              <%= link_to edit_category_task_path(@category,task) do %>
+              <% end %>
+              <%= link_to category_task_path(@category,task), method: :delete, data: { confirm: "Are you sure?" } do %>
+              <% end %>
         </div>
     </div>
-    </div>   
- </div>
-    </div>
+    <% end %>
+  <% end %>
+  </div>
 </div>

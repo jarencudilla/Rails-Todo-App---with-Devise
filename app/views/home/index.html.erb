@@ -1,12 +1,49 @@
 <% if user_signed_in? %>
-<div class="container-fluid" style="margin-top: 60px;">
-<h1 class="text-center">Things I Got To Do Today!</h1>
+<div class="container-fluid" style="margin-top: 70px;">
+<h1 class="text-center"><%= "Things I Got To Do Today! #{Date.today.to_s(:long)}" %></h1>
 
 <%= link_to "New Category", new_category_path %>
 
+<div class="container" style="margin-top: 100px;">
+  <div class="row">
+	<div class="col-md-10">
+      <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
+      <%= link_to 'Create Task', new_category_task_path(:category_id), class:"btn btn-secondary btn-lg float-end" %>
+      <h1>Task yolo!</h1>
+      </div>
+				<div class="table">
+					<table class="table table-striped" style="border: 1px solid #d3d3d3;">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Details</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @category.find.all %>
+              
 
-</div>
-<% else %>
+            <tr>
+              <td>name</td>
+              <td>details</td>
+              <td>deadline</td>
+              <td>
+                //    link_to 'View', category_task_path 
+                // |  link_to 'Edit', edit_category_task_path(category,task) 
+                  
+              </td>
+            </tr>
+            <% end %>
+
+
+             </tbody>
+          </table>
+        </div>
+      </div>
+		</div>
+	</div>
+<% if !user_signed_in? %>
 <div class="container-fluid" style="margin-top: 60px;">
 <%= render 'partials/carousel' %>
 </div>

@@ -1,39 +1,40 @@
-<div class="flex-row d-flex justify-task_details-center">
-
-<div class="col-md-8">
-<div class="card mt-5">
+ <div class="container bg-light" style="margin-top: 100px; width: 80vw">
+  <div class="row">
+		<div class="span4 offset4 well">
+      <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
+      <%= link_to 'Back', category_tasks_path, class:"btn btn-secondary btn-lg float-end" %>
+      <h1 class="text-center">Task</h1>
+      </div>
 
     <div class="card-body">
-    <%= form_for @task do |f| %>
+    <%= form_with model: [category, task] do |f| %>
     
-    <div class="form-group">
-    <%= f.label :task_name%>
-    <%= f.text_field :task_name, class: 'form-control' %>
+    <div class="input-group mb-3">
+    <%= f.label :name, class:"input-group-text" %>
+    <%= f.text_field :name, class:"form-control" %>
     
     </div>
 
-    <div class="form-group">
+    <div class="input-group mb-3">
+    <%= f.label :details, class:"input-group-text" %>
+    <%= f.text_area :details, class:"form-control" %>
+    </div>
 
-    
-    <%= f.label :task_details%>
-    <%= f.text_area :task_details, class: 'form-control'%>
+    <div class="form-group" style="margin-bottom: 20px; margin-top: 10px;">
+
+    <%= f.select :category_id, Category.all.map {|c| [c.name, c.id]} %>
 
     </div>
 
-    <div class="form-group">
-
-    <%= f.select :category_id, Category.all.map {|c| [c.category_name, c.id]} %>
+    <div class="input-group mb-3">
+    <%= f.label :deadline, class:"input-group-text" %>
+    <%= f.text_field :deadline, class:"form-control datepicker" %>
 
     </div>
 
-    <%= f.submit "Create Task", class: 'btn btn-primary' %>
-    <%= link_to "Back", tasks_path, class: 'btn btn-secondary' %>
+    <%= f.submit "Create Task", class: "btn btn-primary btn-lg btn-block" %>
 <% end %>
 
-    </div>
 </div>
-
-
 </div>
-
 </div>
