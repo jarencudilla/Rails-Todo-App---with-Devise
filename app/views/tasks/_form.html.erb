@@ -1,0 +1,39 @@
+<div class="flex-row d-flex justify-task_details-center">
+
+<div class="col-md-8">
+<div class="card mt-5">
+
+    <div class="card-body">
+    <%= form_for @task do |f| %>
+    
+    <div class="form-group">
+    <%= f.label :task_name%>
+    <%= f.text_field :task_name, class: 'form-control' %>
+    
+    </div>
+
+    <div class="form-group">
+
+    
+    <%= f.label :task_details%>
+    <%= f.text_area :task_details, class: 'form-control'%>
+
+    </div>
+
+    <div class="form-group">
+
+    <%= f.select :category_id, Category.all.map {|c| [c.category_name, c.id]} %>
+
+    </div>
+
+    <%= f.submit "Create Task", class: 'btn btn-primary' %>
+    <%= link_to "Back", tasks_path, class: 'btn btn-secondary' %>
+<% end %>
+
+    </div>
+</div>
+
+
+</div>
+
+</div>

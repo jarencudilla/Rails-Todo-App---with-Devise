@@ -1,2 +1,13 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
+<h1>Show Task</h1>
+<div class="container-fluid mt-3">
+<h1>Category: <%= @task.category.category_name %></h1>
+<h3><%= @task.task_name %></h3>
+
+
+<p><%= @task.task_details %></p>
+
+
+<%= link_to "Edit", edit_task_path(@task.id), class: 'btn btn-primary' %>
+<%= link_to "Delete", task_path(@task.id), method: :delete, class: 'btn btn-danger' %>
+<%= link_to "Back", tasks_path, class: 'btn btn-secondary'%>
+</div>

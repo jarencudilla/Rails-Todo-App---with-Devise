@@ -1,0 +1,21 @@
+ <%= form_with(model: category, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :category_name %>
+    <%= form.text_field :category_name %>
+  </div>
+  <div class="field">
+    <%= form.label :category_details %>
+    <%= form.text_area :category_details %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<%= form_for @category do |f| %>
+<%= f.label :category_name %>
+<%= f.text_field :category_name %>
+<%= f.label :category_details %>
+<%= f.text_area :category_details %>
+<%= f.submit %>
+<% end %>
