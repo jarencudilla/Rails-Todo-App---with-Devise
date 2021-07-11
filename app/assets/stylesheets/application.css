@@ -23,7 +23,7 @@ h5,
 h6,
 p,
 a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 p {
@@ -33,14 +33,14 @@ p {
 
 .table thead th {
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 15px;
   padding: 15px;
   vertical-align: top;
 }
 
 .table tbody td {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   padding: 15px;
 }
