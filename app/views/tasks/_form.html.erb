@@ -1,18 +1,18 @@
- <div class="container bg-light" style="margin-top: 100px; width: 80vw">
+ <%= form_with model: [category, task] do |f| %>
+ <div class="container bg-light" style="margin-top: 100px; width: 50vw">
   <div class="row">
 		<div class="span4 offset4 well">
       <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
       <%= link_to 'Back', category_tasks_path, class:"btn btn-secondary btn-lg float-end" %>
-      <h1 class="text-center">Task</h1>
+      <h1>Task</h1>
       </div>
 
     <div class="card-body">
-    <%= form_with model: [category, task] do |f| %>
+    
     
     <div class="input-group mb-3">
     <%= f.label :name, class:"input-group-text" %>
     <%= f.text_field :name, class:"form-control" %>
-    
     </div>
 
     <div class="input-group mb-3">
@@ -21,20 +21,23 @@
     </div>
 
     <div class="form-group" style="margin-bottom: 20px; margin-top: 10px;">
-
     <%= f.select :category_id, Category.all.map {|c| [c.name, c.id]} %>
-
     </div>
 
     <div class="input-group mb-3">
     <%= f.label :deadline, class:"input-group-text" %>
     <%= f.datetime_local_field :deadline, class:"datepicker" %>
+    </div>
 
+    <div class="form-check" style="margin-bottom: 10px;">
+    <%= f.label :completed, class:"form-check-label" %>
+    <%= f.check_box :finish, class:"form-check-input" %>
     </div>
 
     <%= f.submit "Create Task", class: "btn btn-primary btn-lg btn-block" %>
-<% end %>
 
+
+    </div>
+  </div>
 </div>
-</div>
-</div>
+<% end %>

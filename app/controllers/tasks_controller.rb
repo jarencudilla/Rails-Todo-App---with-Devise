@@ -33,13 +33,9 @@ class TasksController < ApplicationController
   def update
     @task = @category.tasks.find(params[:id])
 
-    if @task.update(task_params) && @task.completed
+    if @task.update(task_params)
       @task.save
       redirect_to category_tasks_path(@category)
-      flash[:notice] = 'Task completed.'
-    elsif @task.update(task_params)
-      @task.save
-      redirect_to category_path(@category)
       flash[:notice] = 'Task successfully updated.'
     else
       redirect_to edit_category_task_path(@category), alert: @task.errors.full_messages.first
@@ -59,7 +55,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :details, :deadline, :completed)
+    params.require(:task).permit(:name, :details, :deadline, :category_id, :completed)
   end
-
 end
