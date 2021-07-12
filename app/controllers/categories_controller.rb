@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @categories = current_user.categories.order("created_at DESC")
+    @categories = current_user.categories.order('created_at DESC')
   end
 
   def new
@@ -13,9 +13,9 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.build(category_params)
 
     if @category.valid?
-        @category.save
-        redirect_to categories_path
-        flash[:notice] = "Category created!"
+    @category.save
+    redirect_to categories_path
+    flash[:notice] = 'Category created!'
     else
       redirect_to new_category_path, alert: @category.errors.full_messages.first
     end
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
 
     if @category.update(category_params)
       @category.save
-      redirect_to categories_path, notice: "Category successfully updated."
+      redirect_to categories_path, notice: 'Category successfully updated.'
 
     else
       redirect_to edit_category_path, alert: @category.errors.full_messages.first
@@ -44,7 +44,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category = current_user.categories.find(params[:id])
     @category.destroy
-    redirect_to categories_path, notice: "Category successfully deleted."
+    redirect_to categories_path, notice: 'Category successfully deleted.'
   end
 
   private
@@ -52,5 +52,4 @@ class CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(:name, :details)
   end
-
 end

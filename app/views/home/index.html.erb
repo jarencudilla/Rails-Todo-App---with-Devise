@@ -6,48 +6,43 @@
 
 <div class="container" style="margin-top: 100px;">
   <div class="row">
-  <% @category_task.each do |category| %>
-  <% category.tasks.all.sort_by { |c| c["updated_at"] }.each do |task| %>
-	<div class="col-md-10">
+  	<div class="col-md-10">
       <div class="container" style="margin-bottom: 20px; margin-top: 10px;">
       <%= link_to 'Create Task', new_category_task_path(:category_id), class:"btn btn-secondary btn-lg float-end" %>
       <h1>Task yolo!</h1>
       </div>
 				<div class="table">
+        <% @categories.sort.each do |category| %>
+        
 					<table class="table table-striped" style="border: 1px solid #d3d3d3;">
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Details</th>
+                <th>Deadline</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              
+              <% category.tasks.all.sort_by { |c| c["created_at"] }.each do |task| %>
             <tr>
-              <td>name</td>
-              <td>details</td>
-              <td>deadline</td>
-              <td>
-                  |  link_to 'Edit', edit_category_task_path(category,task) 
-                  
-              </td>
-      <% end %>
-      <% end %>
-      <% end %>
-      <%= link_to "Category: #{@category.name}", category_path(@category) %>
-
-
-            </tr>
+              <td style="width:10%"><%= task.name %></td>
+              <td style="width:10%"><%= task.details %></td>
+              <td style="width:10%"><%= task.deadline.to_s %></td>
+              <td style="width:10%"><%= link_to 'View' %> | <%= link_to 'Edit' %>  
             
-
-
+              </td>
+            </tr>
+              <% end %>
              </tbody>
           </table>
         </div>
       </div>
 		</div>
+    <% end %>
+  <% end %>
 	</div>
+
 <% if !user_signed_in? %>
 <div class="container-fluid" style="margin-top: 60px;">
 <%= render 'partials/carousel' %>

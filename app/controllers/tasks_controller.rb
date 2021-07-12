@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-before_action :authenticate_user!
-before_action :get_category
+  before_action :authenticate_user!
+  before_action :get_category
 
   def index
     @tasks = @category.tasks.all
@@ -18,7 +18,7 @@ before_action :get_category
       redirect_to category_task_path
       flash[:notice] = 'Task created!'
     else
-      redirect_to new_category_task_path(@category), alert: @task.errors.full_messages.first
+      redirect_to category_path(@category), alert: @task.errors.full_messages.first
     end
   end
 
@@ -59,7 +59,7 @@ before_action :get_category
   end
 
   def task_params
-    params.require(:task).permit(:name, :details, :deadline, :category_id, :completed)
+    params.require(:task).permit(:name, :details, :deadline, :completed)
   end
 
 end
